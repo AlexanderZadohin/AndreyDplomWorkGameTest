@@ -1,0 +1,26 @@
+﻿<Window x:Class="AndreyDplomWorkGameTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AndreyDplomWorkGameTest"
+        mc:Ignorable="d"
+        Title="Регистрация и вход" Height="768" Width="1366" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="26*"/>
+            <ColumnDefinition Width="341*"/>
+            <ColumnDefinition Width="316*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="87*"/>
+            <RowDefinition Height="197*"/>
+            <RowDefinition Height="92*"/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="\Resources\Images\BackGroundFon.png"/>
+        </Grid.Background>
+        <Frame NavigationUIVisibility="Hidden" Grid.Column="1" Grid.Row="1" Name="LoginFormFrm"/>
+        
+    </Grid>
+</Window>

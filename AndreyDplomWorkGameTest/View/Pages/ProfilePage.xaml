@@ -1,0 +1,53 @@
+﻿<Page x:Class="AndreyDplomWorkGameTest.View.Pages.ProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AndreyDplomWorkGameTest.View.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="560" d:DesignWidth="1306"
+      Title="ProfilePage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="23*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid Margin="100,0,0,0" Width="914" Height="150" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="128*"/>
+                    <ColumnDefinition Width="329*"/>
+                </Grid.ColumnDefinitions>
+                <Image x:Name="ProfilePhoto" Grid.Column="0">
+                    <Image.Clip>
+                        <EllipseGeometry RadiusX="65" RadiusY="65" Center="70,75"/>
+                    </Image.Clip>
+                </Image>
+                <StackPanel Grid.Column="1">
+                    <TextBlock x:Name="LoginTbl" Foreground="White" FontSize="20" />
+                    <TextBlock x:Name="DescriptionTbl" Foreground="White" FontSize="20" />
+                </StackPanel>
+            </Grid>
+            <TextBlock Text="Ваша библиотека" FontSize="30" Foreground="White" Margin="100,196,948,-20"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ListBox BorderThickness="0" x:Name="BibliaryGameLb" Width="1200" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" Background="{x:Null}" d:ItemsSource="{d:SampleData ItemCount=100}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Width="1206"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Black" Width="350" Height="200" BorderThickness="1" CornerRadius="10" Margin="20">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding IndiGameCatalog.CoverGame}"/>
+                            </Border.Background>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Grid>
+</Page>

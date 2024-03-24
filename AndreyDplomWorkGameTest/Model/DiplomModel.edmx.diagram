@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c14b45c0ae9b41589e8cf6292b144ee4" Name="Diagram1">
+        <EntityTypeShape EntityType="NiDboForDiplomAppWorkModel.Chat" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NiDboForDiplomAppWorkModel.IndiGameCatalog" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NiDboForDiplomAppWorkModel.JanreGame" Width="1.5" PointX="1.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NiDboForDiplomAppWorkModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NiDboForDiplomAppWorkModel.TestGame" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NiDboForDiplomAppWorkModel.UserApp" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NiDboForDiplomAppWorkModel.UserGameBibliary" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <AssociationConnector Association="NiDboForDiplomAppWorkModel.FK_Chat_UserApp" ManuallyRouted="false" />
+        <AssociationConnector Association="NiDboForDiplomAppWorkModel.FK_IndiGameCatalog_JanreGame" ManuallyRouted="false" />
+        <AssociationConnector Association="NiDboForDiplomAppWorkModel.FK_TestGame_IndiGameCatalog" ManuallyRouted="false" />
+        <AssociationConnector Association="NiDboForDiplomAppWorkModel.FK_UserGameBibliary_IndiGameCatalog" ManuallyRouted="false" />
+        <AssociationConnector Association="NiDboForDiplomAppWorkModel.FK_TestGame_UserApp" ManuallyRouted="false" />
+        <AssociationConnector Association="NiDboForDiplomAppWorkModel.FK_UserGameBibliary_UserApp" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

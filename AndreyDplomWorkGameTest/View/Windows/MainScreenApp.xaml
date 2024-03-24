@@ -1,0 +1,33 @@
+﻿<Window x:Class="AndreyDplomWorkGameTest.View.Windows.MainScreenApp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AndreyDplomWorkGameTest.View.Windows"
+        mc:Ignorable="d"
+        Title="Основное окно" Height="768" Width="1366" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Background="#1d1d1f">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="13*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="155*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1" Background="#272727">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions> 
+            <Button Click="GameBibliaryBtn_Click" x:Name="GameBibliaryBtn" Style="{x:Null}" Foreground="WhiteSmoke" Background="{x:Null}" BorderThickness="0" Grid.Column="1" Padding="30 0 30 0" Content="Библиотека игр" FontSize="30"/>
+            <Button Click="TestsGameBtn_Click" x:Name="TestsGameBtn" Style="{x:Null}" Foreground="WhiteSmoke" Background="{x:Null}" BorderThickness="0" Grid.Column="2" Padding="30 0 30 0" Content="Тесты игр" FontSize="30"/>
+            <Button Click="ProfileBtn_Click" x:Name="ProfileBtn" Style="{x:Null}" Foreground="WhiteSmoke" Background="{x:Null}" BorderThickness="0" Grid.Column="3" Padding="30 0 30 0" Content="Профиль" FontSize="30"/>
+            <Button Click="ChatBtn_Click" x:Name="ChatBtn" Style="{x:Null}" Foreground="WhiteSmoke" Background="{x:Null}" BorderThickness="0" Grid.Column="4" Padding="30 0 30 0" Content="Чат" FontSize="30"/>
+            <TextBox TextChanged="SearchTb_TextChanged" x:Name="SearchTb" Grid.Column="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="35" VerticalAlignment="Center" Width="400" Text="Поиск"/>
+        </Grid>
+        <Frame NavigationUIVisibility="Hidden" x:Name="BodyFrm" Grid.Row="2" Margin="30"/>
+    </Grid>
+</Window>

@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище NiDboForDiplomAppWorkModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUser" Type="int" />
+          <Property Name="TextMessage" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="IndiGameCatalog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CoverGame" Type="nvarchar(max)" />
+          <Property Name="LinkLaunch" Type="nvarchar(max)" />
+          <Property Name="LinkDownload" Type="nvarchar(max)" />
+          <Property Name="idJanre" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="JanreGame">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JanreName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TestGame">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idGame" Type="int" />
+          <Property Name="CommentTest" Type="nvarchar(max)" />
+          <Property Name="BagScreenshot" Type="nvarchar(max)" />
+          <Property Name="idUser" Type="int" />
+        </EntityType>
+        <EntityType Name="UserApp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhotoProfile" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserGameBibliary">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idGame" Type="int" />
+          <Property Name="idUser" Type="int" />
+        </EntityType>
+        <Association Name="FK_Chat_UserApp">
+          <End Role="UserApp" Type="Self.UserApp" Multiplicity="0..1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserApp">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IndiGameCatalog_JanreGame">
+          <End Role="JanreGame" Type="Self.JanreGame" Multiplicity="0..1" />
+          <End Role="IndiGameCatalog" Type="Self.IndiGameCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JanreGame">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="IndiGameCatalog">
+              <PropertyRef Name="idJanre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestGame_IndiGameCatalog">
+          <End Role="IndiGameCatalog" Type="Self.IndiGameCatalog" Multiplicity="0..1" />
+          <End Role="TestGame" Type="Self.TestGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndiGameCatalog">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TestGame">
+              <PropertyRef Name="idGame" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestGame_UserApp">
+          <End Role="UserApp" Type="Self.UserApp" Multiplicity="0..1" />
+          <End Role="TestGame" Type="Self.TestGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserApp">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TestGame">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGameBibliary_IndiGameCatalog">
+          <End Role="IndiGameCatalog" Type="Self.IndiGameCatalog" Multiplicity="0..1" />
+          <End Role="UserGameBibliary" Type="Self.UserGameBibliary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndiGameCatalog">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserGameBibliary">
+              <PropertyRef Name="idGame" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGameBibliary_UserApp">
+          <End Role="UserApp" Type="Self.UserApp" Multiplicity="0..1" />
+          <End Role="UserGameBibliary" Type="Self.UserGameBibliary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserApp">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserGameBibliary">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище NiDboForDiplomAppWorkModelContainer">
+          <EntitySet Name="Chat" EntityType="Self.Chat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IndiGameCatalog" EntityType="Self.IndiGameCatalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JanreGame" EntityType="Self.JanreGame" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestGame" EntityType="Self.TestGame" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserApp" EntityType="Self.UserApp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGameBibliary" EntityType="Self.UserGameBibliary" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Chat_UserApp" Association="Self.FK_Chat_UserApp">
+            <End Role="UserApp" EntitySet="UserApp" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IndiGameCatalog_JanreGame" Association="Self.FK_IndiGameCatalog_JanreGame">
+            <End Role="JanreGame" EntitySet="JanreGame" />
+            <End Role="IndiGameCatalog" EntitySet="IndiGameCatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestGame_IndiGameCatalog" Association="Self.FK_TestGame_IndiGameCatalog">
+            <End Role="IndiGameCatalog" EntitySet="IndiGameCatalog" />
+            <End Role="TestGame" EntitySet="TestGame" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestGame_UserApp" Association="Self.FK_TestGame_UserApp">
+            <End Role="UserApp" EntitySet="UserApp" />
+            <End Role="TestGame" EntitySet="TestGame" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGameBibliary_IndiGameCatalog" Association="Self.FK_UserGameBibliary_IndiGameCatalog">
+            <End Role="IndiGameCatalog" EntitySet="IndiGameCatalog" />
+            <End Role="UserGameBibliary" EntitySet="UserGameBibliary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGameBibliary_UserApp" Association="Self.FK_UserGameBibliary_UserApp">
+            <End Role="UserApp" EntitySet="UserApp" />
+            <End Role="UserGameBibliary" EntitySet="UserGameBibliary" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NiDboForDiplomAppWorkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUser" Type="Int32" />
+          <Property Name="TextMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserApp" Relationship="Self.FK_Chat_UserApp" FromRole="Chat" ToRole="UserApp" />
+        </EntityType>
+        <EntityType Name="IndiGameCatalog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CoverGame" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LinkLaunch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LinkDownload" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="idJanre" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="JanreGame" Relationship="Self.FK_IndiGameCatalog_JanreGame" FromRole="IndiGameCatalog" ToRole="JanreGame" />
+          <NavigationProperty Name="TestGame" Relationship="Self.FK_TestGame_IndiGameCatalog" FromRole="IndiGameCatalog" ToRole="TestGame" />
+          <NavigationProperty Name="UserGameBibliary" Relationship="Self.FK_UserGameBibliary_IndiGameCatalog" FromRole="IndiGameCatalog" ToRole="UserGameBibliary" />
+        </EntityType>
+        <EntityType Name="JanreGame">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JanreName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="IndiGameCatalog" Relationship="Self.FK_IndiGameCatalog_JanreGame" FromRole="JanreGame" ToRole="IndiGameCatalog" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TestGame">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idGame" Type="Int32" />
+          <Property Name="BagScreenshot" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="idUser" Type="Int32" />
+          <NavigationProperty Name="IndiGameCatalog" Relationship="Self.FK_TestGame_IndiGameCatalog" FromRole="TestGame" ToRole="IndiGameCatalog" />
+          <NavigationProperty Name="UserApp" Relationship="Self.FK_TestGame_UserApp" FromRole="TestGame" ToRole="UserApp" />
+          <Property Name="CommentTest" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserApp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhotoProfile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Chat" Relationship="Self.FK_Chat_UserApp" FromRole="UserApp" ToRole="Chat" />
+          <NavigationProperty Name="TestGame" Relationship="Self.FK_TestGame_UserApp" FromRole="UserApp" ToRole="TestGame" />
+          <NavigationProperty Name="UserGameBibliary" Relationship="Self.FK_UserGameBibliary_UserApp" FromRole="UserApp" ToRole="UserGameBibliary" />
+        </EntityType>
+        <EntityType Name="UserGameBibliary">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idGame" Type="Int32" />
+          <Property Name="idUser" Type="Int32" />
+          <NavigationProperty Name="IndiGameCatalog" Relationship="Self.FK_UserGameBibliary_IndiGameCatalog" FromRole="UserGameBibliary" ToRole="IndiGameCatalog" />
+          <NavigationProperty Name="UserApp" Relationship="Self.FK_UserGameBibliary_UserApp" FromRole="UserGameBibliary" ToRole="UserApp" />
+        </EntityType>
+        <Association Name="FK_Chat_UserApp">
+          <End Role="UserApp" Type="Self.UserApp" Multiplicity="0..1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserApp">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IndiGameCatalog_JanreGame">
+          <End Role="JanreGame" Type="Self.JanreGame" Multiplicity="0..1" />
+          <End Role="IndiGameCatalog" Type="Self.IndiGameCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JanreGame">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="IndiGameCatalog">
+              <PropertyRef Name="idJanre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestGame_IndiGameCatalog">
+          <End Role="IndiGameCatalog" Type="Self.IndiGameCatalog" Multiplicity="0..1" />
+          <End Role="TestGame" Type="Self.TestGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndiGameCatalog">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TestGame">
+              <PropertyRef Name="idGame" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGameBibliary_IndiGameCatalog">
+          <End Role="IndiGameCatalog" Type="Self.IndiGameCatalog" Multiplicity="0..1" />
+          <End Role="UserGameBibliary" Type="Self.UserGameBibliary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndiGameCatalog">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserGameBibliary">
+              <PropertyRef Name="idGame" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestGame_UserApp">
+          <End Role="UserApp" Type="Self.UserApp" Multiplicity="0..1" />
+          <End Role="TestGame" Type="Self.TestGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserApp">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TestGame">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGameBibliary_UserApp">
+          <End Role="UserApp" Type="Self.UserApp" Multiplicity="0..1" />
+          <End Role="UserGameBibliary" Type="Self.UserGameBibliary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserApp">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserGameBibliary">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NiDboForDiplomAppWorkEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Chat" EntityType="Self.Chat" />
+          <EntitySet Name="IndiGameCatalog" EntityType="Self.IndiGameCatalog" />
+          <EntitySet Name="JanreGame" EntityType="Self.JanreGame" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TestGame" EntityType="Self.TestGame" />
+          <EntitySet Name="UserApp" EntityType="Self.UserApp" />
+          <EntitySet Name="UserGameBibliary" EntityType="Self.UserGameBibliary" />
+          <AssociationSet Name="FK_Chat_UserApp" Association="Self.FK_Chat_UserApp">
+            <End Role="UserApp" EntitySet="UserApp" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IndiGameCatalog_JanreGame" Association="Self.FK_IndiGameCatalog_JanreGame">
+            <End Role="JanreGame" EntitySet="JanreGame" />
+            <End Role="IndiGameCatalog" EntitySet="IndiGameCatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestGame_IndiGameCatalog" Association="Self.FK_TestGame_IndiGameCatalog">
+            <End Role="IndiGameCatalog" EntitySet="IndiGameCatalog" />
+            <End Role="TestGame" EntitySet="TestGame" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGameBibliary_IndiGameCatalog" Association="Self.FK_UserGameBibliary_IndiGameCatalog">
+            <End Role="IndiGameCatalog" EntitySet="IndiGameCatalog" />
+            <End Role="UserGameBibliary" EntitySet="UserGameBibliary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestGame_UserApp" Association="Self.FK_TestGame_UserApp">
+            <End Role="UserApp" EntitySet="UserApp" />
+            <End Role="TestGame" EntitySet="TestGame" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGameBibliary_UserApp" Association="Self.FK_UserGameBibliary_UserApp">
+            <End Role="UserApp" EntitySet="UserApp" />
+            <End Role="UserGameBibliary" EntitySet="UserGameBibliary" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище NiDboForDiplomAppWorkModelContainer" CdmEntityContainer="NiDboForDiplomAppWorkEntities">
+          <EntitySetMapping Name="Chat">
+            <EntityTypeMapping TypeName="NiDboForDiplomAppWorkModel.Chat">
+              <MappingFragment StoreEntitySet="Chat">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="TextMessage" ColumnName="TextMessage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IndiGameCatalog">
+            <EntityTypeMapping TypeName="NiDboForDiplomAppWorkModel.IndiGameCatalog">
+              <MappingFragment StoreEntitySet="IndiGameCatalog">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="GameName" ColumnName="GameName" />
+                <ScalarProperty Name="CoverGame" ColumnName="CoverGame" />
+                <ScalarProperty Name="LinkLaunch" ColumnName="LinkLaunch" />
+                <ScalarProperty Name="LinkDownload" ColumnName="LinkDownload" />
+                <ScalarProperty Name="idJanre" ColumnName="idJanre" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JanreGame">
+            <EntityTypeMapping TypeName="NiDboForDiplomAppWorkModel.JanreGame">
+              <MappingFragment StoreEntitySet="JanreGame">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="JanreName" ColumnName="JanreName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="NiDboForDiplomAppWorkModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestGame">
+            <EntityTypeMapping TypeName="NiDboForDiplomAppWorkModel.TestGame">
+              <MappingFragment StoreEntitySet="TestGame">
+                <ScalarProperty Name="CommentTest" ColumnName="CommentTest" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idGame" ColumnName="idGame" />
+                <ScalarProperty Name="BagScreenshot" ColumnName="BagScreenshot" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserApp">
+            <EntityTypeMapping TypeName="NiDboForDiplomAppWorkModel.UserApp">
+              <MappingFragment StoreEntitySet="UserApp">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PhotoProfile" ColumnName="PhotoProfile" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGameBibliary">
+            <EntityTypeMapping TypeName="NiDboForDiplomAppWorkModel.UserGameBibliary">
+              <MappingFragment StoreEntitySet="UserGameBibliary">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idGame" ColumnName="idGame" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
